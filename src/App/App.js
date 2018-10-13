@@ -7,35 +7,46 @@ const contacts = [
   {
     id: 1,
     name: 'Aleksandra',
-    number: '508 234 405'
+    surname: 'Nowak',
+    number: '508 234 405',
+    isFavorite: true
   },
   {
     id: 2,
     name: 'Joanna',
-    number: '987 356 387'
+    surname: 'Kuc',
+    number: '987 356 387',
+    isFavorite: true
   },
   {
     id: 3,
     name: 'Zenon',
-    number: '598 387 467'
+    surname: 'Zieliński',
+    number: '598 387 467',
+    isFavorite: false
   },
   {
     id: 4,
     name: 'Kunegunda',
-    number: '675 987 476'
+    surname: 'Pieczarka',
+    number: '675 987 476',
+    isFavorite: true
   }
 ]
 class App extends Component {
   render() {
     return (
+      <div className="app">
+      <div className="title">Contact List App</div>
       <ul> {
         contacts.map(
           contact => (
-            <li key={contact.id}> {contact.name} {contact.number} </li>
+            <li key={contact.id}> {contact.name} {contact.surname} <br/> {contact.number} </li>
           )
         )
       }
       </ul>
+      </div>
     )
   }
 
