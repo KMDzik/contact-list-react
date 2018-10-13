@@ -16,6 +16,7 @@ handleSubmit = event => {
     })
     return;
   }
+  this.props.addContactsFunction(this.state.contactData);
   this.setState({contactData: '', error: null})
 }
 

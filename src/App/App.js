@@ -7,37 +7,8 @@ import ContactForm from '../ContactForm/ContactForm';
 class App extends Component {
 
   state = {
-    contacts: [
-
-      {
-        id: 1,
-        name: 'Aleksandra',
-        surname: 'Nowak',
-        number: '508 234 405',
-        isFavorite: true
-      },
-      {
-        id: 2,
-        name: 'Joanna',
-        surname: 'Kuc',
-        number: '987 356 387',
-        isFavorite: true
-      },
-      {
-        id: 3,
-        name: 'Zenon',
-        surname: 'Zieliński',
-        number: '598 387 467',
-        isFavorite: false
-      },
-      {
-        id: 4,
-        name: 'Kunegunda',
-        surname: 'Pieczarka',
-        number: '675 987 476',
-        isFavorite: true
-      }
-    ]
+    contacts: JSON.parse(localStorage.getItem('contacts') || '[]'),
+    previousState: null
   }
 
   toggleContactFavorites = contactId => {
@@ -60,11 +31,26 @@ class App extends Component {
     })
   }
 
+  addContact = name => {
+    this.setState({
+      previousState: this.state,
+      contacts: this.state.contacts.concat({
+        id: Date.now(),
+        name: name,
+        isFavorite: false
+      })
+    })
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+  } 
+
   render() {
     return (
       <div className="app">
         <div className="title">Contact List App</div>
-        <ContactForm />
+        <ContactForm addContactsFunction={this.addContact} />
         <ul> {
           this.state.contacts.map(
             contact => (
