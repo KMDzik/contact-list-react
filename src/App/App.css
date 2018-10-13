@@ -22,4 +22,11 @@ ul {
   line-height: 1,7em;
   text-decoration: none;
   list-style: none;
+  font-size: 25px;
+}
+
+span {
+  color: rgb(255, 187, 0);
+  font-size: 40px;
+
 }
