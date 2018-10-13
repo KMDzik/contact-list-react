@@ -39,30 +39,18 @@ class App extends Component {
     ]
   }
 
-  makeContactFavorites = contactId => {
+  toggleContactFavorites = contactId => {
     this.setState({
       contacts: this.state.contacts.map(
         contact => contactId !== contact.id ? contact : {
           ...contact,
-          isFavorite: true
+          isFavorite: !contact.isFavorite
         }
 
       )
     })
   }
 
-
-  makeContactUnfavorites = contactId => {
-    this.setState({
-      contacts: this.state.contacts.map(
-        contact => contactId !== contact.id ? contact : {
-          ...contact,
-          isFavorite: false
-        }
-
-      )
-    })
-  }
 
   render() {
     return (
@@ -73,8 +61,8 @@ class App extends Component {
             contact => (
               <li key={contact.id}>
                 {contact.isFavorite ?  
-                <span onClick={() => this.makeContactUnfavorites(contact.id)}>&#9733;</span> :
-                <span onClick={() => this.makeContactFavorites(contact.id)}>&#9734;</span>}
+                <span onClick={() => this.toggleContactFavorites(contact.id)}>&#9733;</span> :
+                <span onClick={() => this.toggleContactFavorites(contact.id)}>&#9734;</span>}
                 {contact.name} {contact.surname} <br /> {contact.number}
               </li>
             )
