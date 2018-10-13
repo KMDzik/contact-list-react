@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import './App.css';
+import ContactForm from '../ContactForm/ContactForm';
 
 
 class App extends Component {
@@ -51,11 +52,19 @@ class App extends Component {
     })
   }
 
+  removeContact = contactId => {
+    this.setState({
+      contacts: this.state.contacts.filter(
+        contact => contactId !== contact.id
+      )
+    })
+  }
 
   render() {
     return (
       <div className="app">
         <div className="title">Contact List App</div>
+        <ContactForm />
         <ul> {
           this.state.contacts.map(
             contact => (
@@ -64,6 +73,7 @@ class App extends Component {
                 <span onClick={() => this.toggleContactFavorites(contact.id)}>&#9733;</span> :
                 <span onClick={() => this.toggleContactFavorites(contact.id)}>&#9734;</span>}
                 {contact.name} {contact.surname} <br /> {contact.number}
+                <button onClick={() => this.removeContact(contact.id)}>Delete contact</button>
               </li>
             )
           )
