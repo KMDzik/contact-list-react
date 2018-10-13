@@ -37,15 +37,17 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-      <div className="title">Contact List App</div>
-      <ul> {
-        contacts.map(
-          contact => (
-            <li key={contact.id}> {contact.name} {contact.surname} <br/> {contact.number} </li>
+        <div className="title">Contact List App</div>
+        <ul> {
+          contacts.map(
+            contact => (
+              <li key={contact.id}>{contact.isFavorite && <span>&#9734;</span>} 
+              {contact.name} {contact.surname} <br /> {contact.number} 
+              </li>
+            )
           )
-        )
-      }
-      </ul>
+         }
+        </ul>
       </div>
     )
   }
