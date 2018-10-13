@@ -43,6 +43,7 @@ class App extends Component {
     this.setState({
       contacts: this.state.contacts.map(
         contact => contactId !== contact.id ? contact : {
+          ...contact,
           isFavorite: true
         }
 
@@ -58,8 +59,9 @@ class App extends Component {
         <ul> {
           this.state.contacts.map(
             contact => (
-              <li key={contact.id}>{contact.isFavorite ? <span>&#9733;</span> : 
-                <span onClick={this.makeContactFavorites}>&#9734;</span>}
+              <li key={contact.id}>
+                {contact.isFavorite ? <span>&#9733;</span> :
+                  <span onClick={() => this.makeContactFavorites(contact.id)}>&#9734;</span>}
                 {contact.name} {contact.surname} <br /> {contact.number}
               </li>
             )
