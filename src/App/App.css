@@ -1,5 +1,5 @@
 body {
-  background: rgb(175, 200, 224);
+  background: rgb(60, 139, 212);
 }
 
 .title {
@@ -13,4 +13,13 @@ body {
   text-align: center;
   font-size: 50px;
   padding-top: 25px;
+}
+
+ul {
+  background: rgb(175, 200, 224);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  line-height: 1,7em;
+  text-decoration: none;
+  list-style: none;
 }

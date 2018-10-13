@@ -33,7 +33,7 @@ handleChange = event => {
           this.state.error && <p>{this.state.error.message}</p>
         }
         <input value={this.state.contactData} onChange={this.handleChange}/>
-        <button>Add</button>
+        <button>Add contact</button>
       </form>
     )
   }
