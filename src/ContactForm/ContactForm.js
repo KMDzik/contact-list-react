@@ -15,33 +15,43 @@ class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault()
     if (this.state.contactName === '') {
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          contactName: new Error('Please add name')
-        }
-      })
+      this.setState(
+        (prevState) => ({
+          errors: {
+            ...prevState.errors,
+            contactName: new Error('Please add name')
+          }
+        })
+      )
     }
 
     if (this.state.contactSurname === '') {
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          contactSurname: new Error('Please surename')
-        }
-      })
+      this.setState(
+        (prevState) => ({
+          errors: {
+            ...prevState.errors,
+            contactSurname: new Error('Please surename')
+          }
+        })
+      )
     }
 
     if (this.state.contactNumber === '') {
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          contactNumber: new Error('Please add number')
-        }
-      })
+      this.setState(
+        (prevState) => ({
+          errors: {
+            ...prevState.errors,
+            contactNumber: new Error('Please add number')
+          }
+        })
+      )
     }
 
-    if (this.state.errors.contactName === '' || this.state.errors.contactSurname === '' || this.state.contactNumber === '') {
+    if (
+      this.state.errors.contactName === '' || 
+      this.state.errors.contactSurname === '' || 
+      this.state.contactNumber === ''
+    ) {
       return;
     }
 

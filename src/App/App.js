@@ -60,7 +60,7 @@ class App extends Component {
                 {contact.isFavorite ?  
                 <span onClick={() => this.toggleContactFavorites(contact.id)}>&#9733;</span> :
                 <span onClick={() => this.toggleContactFavorites(contact.id)}>&#9734;</span>}
-                {contact.name} {contact.surname} <br /> {contact.phoneNumber}
+                {contact.name} {contact.surname} {contact.phoneNumber}
                 <button onClick={() => this.removeContact(contact.id)}>Delete contact</button>
               </li>
             )
