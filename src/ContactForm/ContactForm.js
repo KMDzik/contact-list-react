@@ -1,85 +1,75 @@
 import React, { Component } from 'react'
 import './ContactForm.css'
 
+const initialState = {
+  contactName: '',
+  contactSurname: '',
+  contactNumber: '',
+  errors: {}
+}
+
 class ContactForm extends Component {
 
-  state = [
-    {
-      ContactName: '',
-      error: null
-    },
-    {
-      ContactSurname: '',
-      error: null
-    },
-    {
-      ContactNumber: '',
-      error: null
-    }
-  ]
+  state = initialState
 
   handleSubmit = event => {
     event.preventDefault()
-    if (this.state.ContactName === '') {
+    if (this.state.contactName === '') {
       this.setState({
-        error: new Error('Please add name, surename and number')
+        errors: {
+          ...this.state.errors,
+          contactName: new Error('Please add name')
+        }
       })
+    }
+
+    if (this.state.contactSurname === '') {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          contactSurname: new Error('Please surename')
+        }
+      })
+    }
+
+    if (this.state.contactNumber === '') {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          contactNumber: new Error('Please add number')
+        }
+      })
+    }
+
+    if (this.state.errors.contactName === '' || this.state.errors.contactSurname === '' || this.state.contactNumber === '') {
       return;
     }
-    this.props.addContactsFunction(this.state.ContactName);
-    this.setState({ ContactName: '', error: null })
+
+    this.props.addContactsFunction(
+      this.state.contactName,
+      this.state.contactSurname,
+      this.state.contactNumber
+    );
+    this.setState(initialState)
   }
 
-  handleChange = event => {
+  handleNameChange = event => {
     this.setState({
-      ContactName: event.target.value
+      contactName: event.target.value
     })
   }
 
-
-
-
-  handleSubmit = event => {
-    event.preventDefault()
-    if (this.state.ContactSurename === '') {
-      this.setState({
-        error: new Error('Please add name, surename and number')
-      })
-      return;
-    }
-    this.props.addContactsFunction(this.state.ContactSurename);
-    this.setState({ ContactSurename: '', error: null })
-  }
-
-  handleChange = event => {
+  handleSurnameChange = event => {
     this.setState({
-      ContactSurename: event.target.value
+      contactSurname: event.target.value
     })
   }
 
-
-
-
-  handleSubmit = event => {
-    event.preventDefault()
-    if (this.state.ContactNumber === '') {
-      this.setState({
-        error: new Error('Please add name, surename and number')
-      })
-      return;
-    }
-    this.props.addContactsFunction(this.state.ContactNumber);
-    this.setState({ ContactNumber: '', error: null })
-  }
-
-  handleChange = event => {
+  handleNumberChange = event => {
     this.setState({
-      ContactName: event.target.value
+      contactNumber: event.target.value
     })
   }
-
-
-
 
   render() {
     return (
@@ -87,12 +77,16 @@ class ContactForm extends Component {
         {
           this.state.error && <p>{this.state.error.message}</p>
         }
-        <input value={this.state.ContactName} onChange={this.handleChange} />
-        <button>Add name</button>
-        <input value={this.state.ContactSurename} onChange={this.handleChange} />
-        <button>Add surename</button>
-        <input value={this.state.ContactNumber} onChange={this.handleChange} />
-        <button>Add number</button>
+        <input value={this.state.contactName} onChange={this.handleNameChange} />
+        {this.state.errors.contactName && this.state.errors.contactName.message}
+     
+        <input value={this.state.contactSurname} onChange={this.handleSurnameChange} />
+        {this.state.errors.contactSurname && this.state.errors.contactSurname.message}
+  
+        <input value={this.state.contactNumber} onChange={this.handleNumberChange} />
+        {this.state.errors.contactNumber && this.state.errors.contactNumber.message}
+
+        <button>Add</button>
       </form>
 
     )
