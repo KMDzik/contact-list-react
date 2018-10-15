@@ -23,6 +23,8 @@ class App extends Component {
 
            <input placeholder='Phone number' value={this.state.phone}
            onChange={event => this.setState({ phone: event.target.value})}/>
+
+           <button>Submit </button>
          </form>
      )
    }
