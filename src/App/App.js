@@ -7,68 +7,25 @@ import ContactForm from '../ContactForm/ContactForm';
 class App extends Component {
 
   state = {
-    contacts: JSON.parse(localStorage.getItem('contacts') || '[]'),
-    previousState: null
+    name: '',
+    surname: '',
+    phone: '',
   }
+ 
+   render() {
+     return (
+         <form>
+           <input placeholder='First name' value={this.state.name}
+           onChange={event => this.setState({ name: event.target.value})}/>
 
-  toggleContactFavorites = contactId => {
-    this.setState({
-      contacts: this.state.contacts.map(
-        contact => contactId !== contact.id ? contact : {
-          ...contact,
-          isFavorite: !contact.isFavorite
-        }
+           <input placeholder='Surname' value={this.state.surname}
+           onChange={event => this.setState({ surname: event.target.value})}/>
 
-      )
-    })
-  }
-
-  removeContact = contactId => {
-    this.setState({
-      contacts: this.state.contacts.filter(
-        contact => contactId !== contact.id
-      )
-    })
-  }
-
-  addContact = name => {
-    this.setState({
-      previousState: this.state,
-      contacts: this.state.contacts.concat({
-        id: Date.now(),
-        name: name,
-        isFavorite: false
-      })
-    })
-  }
-
-  componentDidUpdate() {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
-  } 
-
-  render() {
-    return (
-      <div className="app">
-        <div className="title">Contact List App</div>
-        <ContactForm addContactsFunction={this.addContact} />
-        <ul> {
-          this.state.contacts.map(
-            contact => (
-              <li key={contact.id}>
-                {contact.isFavorite ?  
-                <span onClick={() => this.toggleContactFavorites(contact.id)}>&#9733;</span> :
-                <span onClick={() => this.toggleContactFavorites(contact.id)}>&#9734;</span>}
-                {contact.name} {contact.surname} <br /> {contact.number}
-                <button onClick={() => this.removeContact(contact.id)}>Delete contact</button>
-              </li>
-            )
-          )
-        }
-        </ul>
-      </div>
-    )
-  }
-
-}
+           <input placeholder='Phone number' value={this.state.phone}
+           onChange={event => this.setState({ phone: event.target.value})}/>
+         </form>
+     )
+   }
+ }
 
 export default App
